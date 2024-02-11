@@ -1,0 +1,43 @@
+Table agents {
+  agent_id integer [primary key]
+  company_id integer
+  measure_id integer
+  profile_link varchar
+  name varchar
+  cell_number varchar
+}
+
+Table companies {
+  company_id integer [primary key]
+  name varchar
+  no_of_agents integer
+  no_of_properties integer
+  ORN_company_license varchar
+  cell_number varchar
+}
+
+Table measures {
+  measure_id integer [primary key]
+  agent_id integer
+  no_of_properties integer
+  total_no_of_sales integer
+  total_revenue decimal
+}
+
+Table properties {
+  property_id integer [primary key]
+  company_id integer
+  agent_id integer
+  measure_id integer
+  link varchar
+  thumbnail_image varchar
+  no_of_images integer
+  type varchar
+}
+
+Ref: agents.company_id > companies.company_id
+Ref: agents.measure_id > measures.measure_id
+Ref: measures.agent_id > agents.agent_id
+Ref: properties.company_id > companies.company_id
+Ref: properties.agent_id > agents.agent_id
+Ref: properties.measure_id > measures.measure_id
